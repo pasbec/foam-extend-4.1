@@ -28,6 +28,7 @@ License
 #include "cpuTime.H"
 #include "cyclicPolyPatch.H"
 #include "cellSet.H"
+#include "faceSet.H"
 #include "regionSplit.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -102,6 +103,32 @@ void domainDecomposition::distributeCells()
             }
         }
     }
+    if (decompositionDict_.found("preserveFaceSets"))
+    {
+        wordList sNames(decompositionDict_.lookup("preserveFaceSets"));
+
+        Info<< "Keeping owner and neighbour of faces in sets " << sNames
+            << " on same processor" << endl;
+
+        forAll(sNames, i)
+        {
+            faceSet fs
+            (
+                *this,
+                sNames[i],
+                IOobject::MUST_READ,
+                IOobject::NO_WRITE
+            );
+
+            labelList fl = fs.toc();
+
+            forAll(fl, i)
+            {
+                sameProcFaces.insert(fl[i]);
+            }
+        }
+    }
+
 
 
     // Construct decomposition method and either do decomposition on
