@@ -1,6 +1,7 @@
 #!/bin/sh
 cd ${0%/*} || exit 1    # run from this directory
 
+cd "$WM_PROJECT_DIR/applications"
 if [ "$PWD" != "$WM_PROJECT_DIR/applications" ]
 then
     echo "Error: Current directory in not \$WM_PROJECT_DIR/applications"

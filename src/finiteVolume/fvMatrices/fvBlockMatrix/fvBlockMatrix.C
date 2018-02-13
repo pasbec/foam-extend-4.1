@@ -235,8 +235,8 @@ void Foam::fvBlockMatrix<Type>::insertUpperLower
 
     if (matrix.symmetric() && this->symmetric())
     {
-        Info<< "Both matrices are symmetric: inserting only upper triangle"
-            << endl;
+//         Info<< "Both matrices are symmetric: inserting only upper triangle"
+//             << endl;
     }
     else
     {
@@ -639,9 +639,9 @@ void Foam::fvBlockMatrix<Type>::insertCouplingUpperLower
 
     if (matrix.symmetric() && this->symmetric())
     {
-        Info<< "Both fvScalarMatrix and block matrix are symmetric: " << nl
-            << "inserting only upper triangle"
-            << endl;
+//         Info<< "Both fvScalarMatrix and block matrix are symmetric: " << nl
+//             << "inserting only upper triangle"
+//             << endl;
     }
     else
     {
